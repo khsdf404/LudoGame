@@ -15,28 +15,12 @@ html, body {
 
 main {
    display: flex;
-   flex-direction: column;
+   flex-flow: wrap;
    justify-content: center;
    align-items: center;
 
    width: 320px;
-}
-main > .cols, main > .row {
-   width: 100%;
-}
-main > .cols {
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-}
-
-main > .row {
-   display: flex;
-   flex-direction: row;
-   justify-content: center;
-   align-items: center;
-}
+} 
 
 span {
    display: flex;
@@ -50,7 +34,9 @@ span {
    border-radius: 3px;
 
 }
-
+span.invisible {
+   opacity: 0;
+}
 
 
 .redbg {
