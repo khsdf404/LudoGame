@@ -2,7 +2,8 @@ const colors = ['red', 'green', 'blue', 'yellow']
 const $wrap = $js(`main`);
 const size = {width: 8, height: 14};
 
-function isColor(i, j) {
+
+const isColor = (i, j) => {
    green = [[0, 2], [0, 3], [1, 3], [1, 4], [1, 5], [1, 6]];
    blue = [[8, 0], [7, 0], [7, 1], [6, 1], [5, 1], [4, 1]];
    red = [[13, 5], [13, 4], [12, 4], [12, 3], [12, 2], [12, 1]];
@@ -20,7 +21,6 @@ function isColor(i, j) {
    }
    return null;
 }
-
 function setTable () {
    let html = ``;
    for (let i = 0; i < size.height; i++) {
@@ -41,6 +41,10 @@ function setTable () {
       }
    }
    $wrap.ihtml(html);
+
+
+
+   
 }
 
 setTable();

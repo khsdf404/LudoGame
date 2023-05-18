@@ -1,0 +1,16 @@
+#dicefield {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   width: 50%;
+   height: 50px;
+   margin-top: 20px;
+
+   background: #ccc8c7;
+   border-radius: 2px;
+
+   font-size: 18px;
+   color: #111;
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
