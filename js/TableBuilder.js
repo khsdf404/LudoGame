@@ -11,13 +11,13 @@ const isColor = (i, j) => {
 
    for(let k = 0; k < 6; k++) {
       if (i == green[k][0] && j == green[k][1])
-         return 'green';
+         return k == 0 && 'greenbg start-cell' || 'greenbg finish-cell';
       if (i == blue[k][0] && j == blue[k][1])
-         return 'blue';
+         return k == 0 && 'bluebg start-cell' || 'bluebg finish-cell';
       if (i == red[k][0] && j == red[k][1])
-         return 'red';
+         return k == 0 && 'redbg start-cell' || 'redbg finish-cell';
       if (i == yellow[k][0] && j == yellow[k][1])
-         return 'yellow';
+         return k == 0 && 'yellowbg start-cell' ||  'yellowbg finish-cell';
    }
    return null;
 }
@@ -28,14 +28,14 @@ function setTable () {
          if (j != 0 && j != size.width - 1) {
             if (i != 0 && i != size.height - 1) {
                if (isColor(i, j))
-                  html += `<span class="${isColor(i, j)}bg"></span>\n`;
+                  html += `<span class="${isColor(i, j)}"></span>\n`;
                else 
                   html += '<span class="invisible"></span>\n';
                continue;
             }
          }
          if (isColor(i, j))
-            html += `<span class="${isColor(i, j)}bg"></span>\n`;
+            html += `<span class="${isColor(i, j)}"></span>\n`;
          else 
             html += '<span class="cell"></span>\n';
       }
