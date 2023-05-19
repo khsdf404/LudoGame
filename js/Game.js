@@ -1,14 +1,15 @@
 const DiceAmount = 2;
 const Player1 = new Player(['red', 'green']);
-const Player2 = new Player(['yellow', 'blue'])
+const Player2 = new Player(['yellow', 'blue']);
 const $playbtn = $js(`#dicefield`);
 
-const Turn = (() => {
+const ActivePlayer = (() => {
    let cnt = 0;
    return function() {
-      return (cnt++)%2;
+      return (cnt++)%2 == 0 ? Player1 : Player2;
    }
 })();
+ 
 
 function DiceThrow() {
    const random = (min, max) => Math.round(Math.random() * (max - min)) + min;
@@ -33,14 +34,10 @@ class Game {
 
    } 
    MakeMove() {
-      log(Turn());
       let steps = DiceThrow();
       log(`${steps}, Allow: ${SixAmount(steps) > 0}`)
       if (SixAmount(steps) > 0) {
-         Player.AllowAppend(); 
-
-         // show possible moves when click on squares with pans
-            // Player1.RefreshPanWays
+         ActivePlayer().AllowAppend();
       }
    }
 }
@@ -52,5 +49,5 @@ log(Player1.teams)
 
 
 $js(`#dicefield`).onClick(() => {
-   game.MakeMove();
+   NewGame.MakeMove();
 })

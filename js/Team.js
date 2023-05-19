@@ -21,32 +21,17 @@ const Square = ((() => {
 
 function getPath(color, startIndex) {
    let indexArr = []; 
-   for (let i = 0; i < 40; i++) indexArr.push(Square[(i+startIndex) % 40]);
+   for (let i = 0; i < 40; i++) 
+      indexArr.push(Square[(i+startIndex) % 40]);
    // .finish-path indexes
-   if (color == 'yellow') {
-      indexArr.push(54); 
-      indexArr.push(62);
-      indexArr.push(70);
-      indexArr.push(78);
-   }
-   else if (color == 'blue') {
-      indexArr.push(57);
-      indexArr.push(49);
-      indexArr.push(41);
-      indexArr.push(33);
-   }
-   else if (color == 'green') {
-      indexArr.push(11); 
-      indexArr.push(12);
-      indexArr.push(13);
-      indexArr.push(14);
-   }
-   else if (color == 'red') {
-      indexArr.push(100); 
-      indexArr.push(99);
-      indexArr.push(98);
-      indexArr.push(97);
-   }
+   if (color == 'yellow')
+      indexArr.push(...[54, 62, 70, 78]);
+   else if (color == 'blue')
+      indexArr.push(...[57, 49, 41, 33]);
+   else if (color == 'green')
+      indexArr.push(...[11, 12, 13, 14]);
+   else if (color == 'red')
+      indexArr.push(100, 99, 98, 97);
    return indexArr;
 }
 const GreenPath = (() => {
@@ -67,9 +52,17 @@ const BluePath = (() => {
 class Team {
    color;
    #path;
+   #pans;
+   #startCell;
+   #finishCell;
+   #finishWay;
    constructor (color) {
       this.color = color;
       this.#setPath();
+      this.#pans = [];
+      this.#startCell = $js(`.start-cell`).filter((el) => { return el.hasClass(`team-${color}`) });
+      this.#finishCell = $js(`.finish-cell`).filter((el) => { return el.hasClass(`team-${color}`) });
+      this.#finishWay = $js(`.finish-way`).filter((el) => { return el.hasClass(`team-${color}`) });
    }
    getPath() {
       return this.#path;
@@ -86,6 +79,12 @@ class Team {
       }
       else {
          this.#path = BluePath;
+      }
+   }
+
+   AllowAppend() {
+      if (this.#pans.length < 4) {
+         this.#startCell.css({'background': '#ccc'})
       }
    }
 }
