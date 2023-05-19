@@ -1,4 +1,4 @@
-const $square = ((() => {
+const Square = ((() => {
    return function() {
       let $allSquares = $js(`.cell`).extend(`.start-cell, .finish-cell`);
       let $topSquares = $allSquares.get([0, 1, 2, 36, 32, 3, 4, 5]);
@@ -21,57 +21,76 @@ const $square = ((() => {
 
 function getPath(color, startIndex) {
    let indexArr = []; 
-   for (let i = 0; i < 40; i++) indexArr.push($square[(i+startIndex) % 40]);
+   for (let i = 0; i < 40; i++) indexArr.push(Square[(i+startIndex) % 40]);
    // .finish-path indexes
    if (color == 'yellow') {
       indexArr.push(54); 
       indexArr.push(62);
       indexArr.push(70);
-      indexArr.push(78)
+      indexArr.push(78);
    }
    else if (color == 'blue') {
-      indexArr.push(33); 
-      indexArr.push(41);
+      indexArr.push(57);
       indexArr.push(49);
-      indexArr.push(57)
+      indexArr.push(41);
+      indexArr.push(33);
    }
    else if (color == 'green') {
       indexArr.push(11); 
       indexArr.push(12);
       indexArr.push(13);
-      indexArr.push(14)
+      indexArr.push(14);
    }
-   else {
-      indexArr.push(97); 
-      indexArr.push(98);
+   else if (color == 'red') {
+      indexArr.push(100); 
       indexArr.push(99);
-      indexArr.push(100)
+      indexArr.push(98);
+      indexArr.push(97);
    }
    return indexArr;
 }
-const greenPath = (() => {
+const GreenPath = (() => {
    return getPath('green', 4);
 })();
-const yellowPath = (() => {
+const YellowPath = (() => {
    return getPath('yellow', 14);
 })();
-const redPath = (() => {
+const RedPath = (() => {
    return getPath('red', 24);
 })();
-const bluePath = (() => {
+const BluePath = (() => {
    return getPath('blue', 34);
 })();
 
 
 
-log($js(`main span`).get(greenPath))
-log($js(`main span`).get(greenPath))
-
-
-
 class Team {
-   constructor (name) {
-      this.name = name;
-
+   color;
+   #path;
+   constructor (color) {
+      this.color = color;
+      this.#setPath();
+   }
+   getPath() {
+      return this.#path;
+   }
+   #setPath () {
+      if (this.color == 'green') {
+         this.#path = GreenPath;
+      }
+      else if (this.color == 'yellow') {
+         this.#path = YellowPath;
+      }
+      else if (this.color == 'red') {
+         this.#path = RedPath;
+      }
+      else {
+         this.#path = BluePath;
+      }
    }
 }
+
+let reds = new Team('red');
+log($js(`main span`).get(reds.getPath()))
+let blues = new Team('blue');
+log($js(`main span`).get(blues.getPath()))
