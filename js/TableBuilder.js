@@ -25,17 +25,23 @@ function setTable () {
    let html = ``;
    for (let i = 0; i < size.height; i++) {
       for (let j = 0; j < size.width; j++) {
+         let colorClass = isColor(i, j)
          if (j != 0 && j != size.width - 1) {
             if (i != 0 && i != size.height - 1) {
-               if (isColor(i, j))
-                  html += `<span class="${isColor(i, j)}"></span>\n`;
+               if (colorClass)
+                  html += `<span class="${colorClass}"></span>\n`;
                else 
                   html += '<span class="invisible"></span>\n';
                continue;
             }
          }
-         if (isColor(i, j))
-            html += `<span class="${isColor(i, j)}"></span>\n`;
+         if (colorClass) {
+            html += `<span class="${colorClass}">${(() => {
+               if (colorClass.indexOf('start') > -1)
+                  return `<svg xmlns="http://www.w3.org/2000/svg" height="34" width="34" viewBox="0 96 960 960"><path d="M450 856V606H200v-60h250V296h60v250h250v60H510v250h-60Z"/></svg>`
+               return ``
+            })()}</span>\n`;
+         }
          else 
             html += '<span class="cell"></span>\n';
       }

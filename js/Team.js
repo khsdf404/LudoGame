@@ -84,7 +84,12 @@ class Team {
 
    AllowAppend() {
       if (this.#pans.length < 4) {
-         this.#startCell.css({'background': '#ccc'})
+         this.#startCell.addClass(`allowed`)
+      }
+   }
+   CancelAppend() {
+      if (this.#pans.length < 4) {
+         this.#startCell.removeClass(`allowed`)
       }
    }
 }

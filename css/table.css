@@ -27,6 +27,8 @@ main {
 
 span {
    display: flex;
+   justify-content: center;
+   align-items: center;
 
    width: 34px;
    height: 34px;
@@ -39,6 +41,9 @@ span {
 }
 span.invisible {
    opacity: 0;
+}
+span svg {
+   display: none;
 }
 
 
@@ -54,3 +59,9 @@ span.invisible {
 .yellowbg {
    background: #ff0;
 }
+
+
+
+span.allowed svg {
+   display: block;
+} 

@@ -9,7 +9,7 @@ const ActivePlayer = (() => {
       return (cnt++)%2 == 0 ? Player1 : Player2;
    }
 })();
- 
+
 
 function DiceThrow() {
    const random = (min, max) => Math.round(Math.random() * (max - min)) + min;
@@ -34,11 +34,16 @@ class Game {
 
    } 
    MakeMove() {
+      if (this.ActivePlayer) this.ResetMove();
+      this.ActivePlayer = ActivePlayer();
       let steps = DiceThrow();
       log(`${steps}, Allow: ${SixAmount(steps) > 0}`)
       if (SixAmount(steps) > 0) {
-         ActivePlayer().AllowAppend();
+         this.ActivePlayer.AllowAppend();
       }
+   }
+   ResetMove() {
+      this.ActivePlayer.CancelAppend();
    }
 }
 

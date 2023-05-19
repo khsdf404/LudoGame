@@ -12,4 +12,9 @@ class Player {
          this.#teams[i].AllowAppend();
       }
    };
+   CancelAppend() {
+      for (let i = 0; i < this.#teamsAmount; i++) {
+         this.#teams[i].CancelAppend();
+      }
+   };
 }
