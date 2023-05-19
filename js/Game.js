@@ -3,6 +3,12 @@ const Player1 = new Player;
 const Player2 = new Player;
 const $playbtn = $js(`#dicefield`);
 
+const Turn = (() => {
+   let cnt = 0;
+   return function() {
+      return (cnt++)%2;
+   }
+})();
 
 function DiceThrow() {
    const random = (min, max) => Math.round(Math.random() * (max - min)) + min;
@@ -24,6 +30,7 @@ function SixAmount(arr) {
 
 class Game {
    MakeMove() {
+      log(Turn());
       let steps = DiceThrow();
       log(`${steps}, Allow: ${SixAmount(steps) > 0}`)
       if (SixAmount(steps) > 0) {
