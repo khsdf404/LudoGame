@@ -63,6 +63,11 @@ class Team {
       this.#startCell = $js(`.start-cell`).filter((el) => { return el.hasClass(`team-${color}`) });
       this.#finishCell = $js(`.finish-cell`).filter((el) => { return el.hasClass(`team-${color}`) });
       this.#finishWay = $js(`.finish-way`).filter((el) => { return el.hasClass(`team-${color}`) });
+
+      this.#startCell.onClick(($elem, e, i) => { 
+         if ($elem.hasClass(`allowed`))
+            this.AppendPan();
+      })
    }
    getPath() {
       return this.#path;
@@ -83,16 +88,16 @@ class Team {
    }
 
    AllowAppend() {
-      if (this.#pans.length < 4) {
+      if (this.#pans.length < 4)
          this.#startCell.addClass(`allowed`)
-      }
    }
    CancelAppend() {
-      if (this.#pans.length < 4) {
-         this.#startCell.removeClass(`allowed`)
-      }
+      this.#startCell.removeClass(`allowed`)
    }
-}
 
-let reds = new Team('red');
+   AppendPan() {
+      log(`pan appended ${this.color}`)
+   };
+}
+ 
  

@@ -37,9 +37,10 @@ class Game {
       if (this.ActivePlayer) this.ResetMove();
       this.ActivePlayer = ActivePlayer();
       let steps = DiceThrow();
-      log(`${steps}, Allow: ${SixAmount(steps) > 0}`)
+      log(`${this.ActivePlayer.colors}, Allow: ${SixAmount(steps) > 0}`)
       if (SixAmount(steps) > 0) {
          this.ActivePlayer.AllowAppend();
+         
       }
    }
    ResetMove() {
@@ -55,4 +56,8 @@ log(Player1.teams)
 
 $js(`#dicefield`).onClick(() => {
    NewGame.MakeMove();
+});
+$js(`.start-cell`).onClick(($elem) => {
+   if ($elem.hasClass(`allowed`))
+      NewGame.ResetMove();
 })
