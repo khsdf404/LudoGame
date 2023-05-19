@@ -7,7 +7,10 @@ class JSFeatures {
     e; deepthElem;
 
     constructor(elem = null) {
-        if (elem == null) return this;
+        if (elem == null) {
+            this.e = [];
+            return;
+        }
         this.deepthElem = document;
         if (typeof(elem) != 'string') {
             this.e = Array.from(elem);
