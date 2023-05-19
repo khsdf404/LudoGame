@@ -7,10 +7,23 @@ class JSFeatures {
     e; deepthElem;
 
     constructor(elem = null) {
-        if (elem == null) return this;
+        if (elem == null) {
+            this.e = [];
+            return;
+        }
         this.deepthElem = document;
         if (typeof(elem) != 'string') {
             this.e = Array.from(elem);
+            return;
+        }
+        if (elem.indexOf(',') > -1) {
+            elem = elem.replace(/, /g, ',');
+            let elemArr = elem.split(`,`);
+            let mainElem = new JSFeatures(elemArr[0])
+            for (let i = 1; i < elemArr.length; i++)     {
+                mainElem.extend(elemArr[i])
+            }
+            this.e = Array.from(mainElem.e); 
             return;
         }
         while (elem.indexOf(' ') > -1) {
@@ -21,14 +34,14 @@ class JSFeatures {
             elem = [document.getElementById(elem.replace('#', ''))];
         else if (elem.indexOf('.') > -1) 
             elem = this.deepthElem.getElementsByClassName(elem.replace('.', ''));
-        else { 
-            // log(`in: ${elem}`); log(this.parent)
+        else {
             elem = this.deepthElem.getElementsByTagName(elem); 
         }
         this.e = Array.from(elem); 
     } 
     get(index = 0) {
-        if (typeof(index) == 'number') return this.e && this.e[index]|| null;
+        // index is a number(returns DOM-element) or array (returns array of DOM-elements)
+        if (typeof(index) == 'number') return this.e && this.e[index] || null;
         let childGroup = []
         for(let i = 0; i < index.length; i++)
             childGroup.push(this.e[index[i]]);
@@ -369,11 +382,33 @@ class JSFeatures {
             f(this.get(i), i)
     }
     toJSF() {
-            let arr = []
-            this.each((el, i) => { 
-                arr[i] = el;
-            })
-            return new JSFeatures(arr);
+        let arr = []
+        this.each((el, i) => { 
+            arr[i] = el;
+        })
+        return new JSFeatures(arr);
+    }
+
+
+
+    extend(collection) {
+        if (typeof(collection) == `string`) {
+            collection = $js(collection)
+            for(let i = 0; i < collection.size(); i++) {
+                this.e.push(collection.get(i))
+            }
+        }
+        else if (collection.e) {
+            for(let i = 0; i < collection.size(); i++) {
+                this.e.push(collection.get(i))
+            }
+        }
+        else {
+            for(let i = 0; i < collection.length; i++) {
+                this.e.push(collection[i])
+            }
+        }
+        return this;
     }
     // private
     #Exeption(text) {
