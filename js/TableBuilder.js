@@ -49,4 +49,3 @@ function setTable () {
 
 setTable();
 
-log($js(`span`).not('.invisible'))
