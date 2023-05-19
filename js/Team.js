@@ -91,6 +91,4 @@ class Team {
 }
 
 let reds = new Team('red');
-log($js(`main span`).get(reds.getPath()))
-let blues = new Team('blue');
-log($js(`main span`).get(blues.getPath()))
+ 

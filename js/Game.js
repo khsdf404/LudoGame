@@ -1,6 +1,6 @@
 const DiceAmount = 2;
-const Player1 = new Player;
-const Player2 = new Player;
+const Player1 = new Player(['red', 'green']);
+const Player2 = new Player(['yellow', 'blue'])
 const $playbtn = $js(`#dicefield`);
 
 const Turn = (() => {
@@ -28,14 +28,16 @@ function SixAmount(arr) {
    return cnt || sum == 6 && 1 || 0;
 }
 
-class Game {
+class Game { 
+   constructor() {
+
+   } 
    MakeMove() {
       log(Turn());
       let steps = DiceThrow();
       log(`${steps}, Allow: ${SixAmount(steps) > 0}`)
       if (SixAmount(steps) > 0) {
-         // allow to add Pan:
-            // Player1.Allow()
+         Player.AllowAppend(); 
 
          // show possible moves when click on squares with pans
             // Player1.RefreshPanWays
@@ -44,7 +46,10 @@ class Game {
 }
 
 
-const game = new Game;
+const NewGame = new Game();
+log(Player1.teams)
+
+
 
 $js(`#dicefield`).onClick(() => {
    game.MakeMove();
