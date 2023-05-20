@@ -1,6 +1,6 @@
 :root {
-   --enable-button-bg: #a3ffb4;
-   --disable-button-bg: #ffaeae;
+   --enabled-button-bg: #a3ffb4;
+   --disabled-button-bg: #ffaeae;
 }
 
 .play-buttons-wrap {

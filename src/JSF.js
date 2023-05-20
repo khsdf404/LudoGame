@@ -128,7 +128,9 @@ class JSFeatures {
         this.e = arr;
         return this;
     }
-    
+    clone() {
+        return new JSFeatures(this.e);
+    }
 
 
 
