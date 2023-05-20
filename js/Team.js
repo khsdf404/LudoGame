@@ -34,30 +34,20 @@ function getPath(color, startIndex) {
       indexArr.push(100, 99, 98, 97);
    return indexArr;
 }
-const GreenPath = (() => {
-   return getPath('green', 4);
-})();
-const YellowPath = (() => {
-   return getPath('yellow', 14);
-})();
-const RedPath = (() => {
-   return getPath('red', 24);
-})();
-const BluePath = (() => {
-   return getPath('blue', 34);
-})();
 
 
 
 class Team {
-   color;
+   Color;
+   Owner;
    #path;
    #pans;
    #startCell;
    #finishCell;
    #finishWay;
-   constructor (color) {
-      this.color = color;
+   constructor (color, owner) {
+      this.Owner = owner;
+      this.Color = color;
       this.#setPath();
       this.#pans = [];
       this.#startCell = $js(`.start-cell`).filter((el) => { return el.hasClass(`team-${color}`) });
@@ -73,17 +63,17 @@ class Team {
       return this.#path;
    }
    #setPath () {
-      if (this.color == 'green') {
-         this.#path = GreenPath;
+      if (this.Color == 'green') {
+         this.#path = getPath('green', 4);
       }
-      else if (this.color == 'yellow') {
-         this.#path = YellowPath;
+      else if (this.Color == 'yellow') {
+         this.#path = getPath('yellow', 14);
       }
-      else if (this.color == 'red') {
-         this.#path = RedPath;
+      else if (this.Color == 'red') {
+         this.#path = getPath('red', 24);
       }
       else {
-         this.#path = BluePath;
+         this.#path = getPath('blue', 34);
       }
    }
 
@@ -96,7 +86,7 @@ class Team {
    }
 
    AppendPan() {
-      log(`pan appended ${this.color}`)
+      log(`pan appended ${this.Color} to a ${this.Owner.Name}`)
    };
 }
  

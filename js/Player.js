@@ -1,17 +1,42 @@
+function SixAmount(arr) {
+   let cnt = 0;
+   let sum = 0;
+   arr.forEach(el => {
+      if (el == 6) cnt++;
+      sum += el;
+   });
+   return cnt || sum == 6 && 1 || 0;
+}
 class Player {
-   colors;
+   Name;
+   Colors;
+   Dices;
    #teams = [];
    #teamsAmount;
-   constructor(colors) {
-      this.colors = colors;
+   constructor(colors, name) {
+      this.Name = name;
+      this.Colors = colors;
       for(let i = 0; i < colors.length; i++) {
-         this.#teams.push(new Team(colors[i]))
+         this.#teams.push(new Team(colors[i], this))
       }
       this.#teamsAmount = colors.length;
    }
+   DiceThrow(DiceAmount) {
+      const random = (min, max) => Math.round(Math.random() * (max - min)) + min;
+      let arr = [];
+      for (let i = 0; i < DiceAmount; i++) {
+         arr.push(random(1, 6));
+      } 
+      this.Dices = arr;
+      if (SixAmount(arr) > 0) {
+         this.AllowAppend();
+      }
+
+      log(`Dices: ${arr} [${this.Name}]`)
+   }
    AllowAppend() {
       for (let i = 0; i < this.#teamsAmount; i++) {
-         this.#teams[i].AllowAppend();
+         this.#teams[i].AllowAppend(this);
       }
    };
    CancelAppend() {
@@ -19,4 +44,8 @@ class Player {
          this.#teams[i].CancelAppend();
       }
    };
+ 
+   hasMove() {
+      return SixAmount(this.Dices) > 0;
+   }
 }
