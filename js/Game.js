@@ -54,7 +54,7 @@ log(Player1.teams)
 
 
 
-$js(`#dicefield`).onClick(() => {
+$js(`.play-buttons-wrap button`).onClick(() => {
    NewGame.MakeMove();
 });
 $js(`.start-cell`).onClick(($elem) => {

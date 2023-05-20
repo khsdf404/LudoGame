@@ -1,18 +1,15 @@
-* {
-   margin: 0;
-   padding: 0;
+:root {
+   --cell-width: 4.5vh;
+   --cell-height: 4.5vh;
+ 
+   --field-width: calc(var(--cell-width) * 8 + 48px);
+  
+   --redbg: #f00;
+   --greenbg: #0f0;
+   --bluebg: #00f;
+   --yellowbg: #ff0;
 }
 
-html, body {
-   display: flex;
-   flex-direction: column;
-
-   width: 100%;
-   height: 100%;
-
-   justify-content: center;
-   align-items: center;
-}
 
 main {
    position: relative;
@@ -21,8 +18,8 @@ main {
    flex-flow: wrap;
    justify-content: center;
    align-items: center;
-
-   width: 320px;
+ 
+   width: var(--field-width);
 } 
 
 span {
@@ -30,8 +27,8 @@ span {
    justify-content: center;
    align-items: center;
 
-   width: 34px;
-   height: 34px;
+   width: var(--cell-width);
+   height: var(--cell-height);
 
    margin: 2px;
 
@@ -42,26 +39,26 @@ span {
 span.invisible {
    opacity: 0;
 }
-span svg {
-   display: none;
-}
+
 
 
 .redbg {
-   background: #f00;
+   background: var(--redbg);
 }
 .greenbg {
-   background: #0f0;
+   background: var(--greenbg);
 }
 .bluebg {
-   background: #00f;
+   background: var(--bluebg);
 }
 .yellowbg {
-   background: #ff0;
+   background: var(--yellowbg);
 }
 
 
-
+span svg {
+   display: none;
+}
 span.allowed svg {
    display: block;
 } 

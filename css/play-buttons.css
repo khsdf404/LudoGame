@@ -1,0 +1,36 @@
+:root {
+   --enable-button-bg: #a3ffb4;
+   --disable-button-bg: #ffaeae;
+}
+
+.play-buttons-wrap {
+   position: relative;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+
+   width: var(--field-width);
+   height: 50px;
+   margin-top: 20px; 
+}
+
+.play-buttons-wrap button {
+   height: 100%;
+   width: 45%; 
+
+   background: #ccc8c7;
+   border-radius: 4px;
+
+   font-size: 18px;
+   color: #333;
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.play-buttons-wrap button.enabled {
+   background: var(--enabled-button-bg);
+   cursor: pointer;
+}
+.play-buttons-wrap button.disabled {
+   background: var(--disabled-button-bg);
+   cursor: not-allowed;
+}
