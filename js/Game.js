@@ -18,7 +18,17 @@ function SetButton(index, state) {
       .addClass(added)
       .removeClass(removed);
 }
-
+const setTitle = (() => {
+   $text = $js(`.title-text`);
+   
+   return function(text, state) {
+      $text.text(text)
+      if (state)
+         $text.addClass(`hasMove`)
+      else 
+         $text.removeClass('hasMove')
+   }
+})()
  
 
 class Game { 
@@ -27,10 +37,12 @@ class Game {
       SetButton(ActivePlayer.getIndex(), 1);
    } 
    MakeMove() {
-      SetButton(ActivePlayer.getIndex(), 0);
+      SetButton(0, 0);
+      SetButton(1, 0);
       ActivePlayer.get().DiceThrow(DiceAmount);
+      setTitle(`Dices: ${ActivePlayer.get().Dices} [${ActivePlayer.get().Name}]`, ActivePlayer.get().hasMove());
       
-      
+
       if (!ActivePlayer.get().hasMove()) {
          ActivePlayer.swap();
          SetButton(ActivePlayer.getIndex(), 1);
@@ -38,6 +50,7 @@ class Game {
    }
    ResetMove() {
       ActivePlayer.get().CancelAppend();
+      setTitle(`[${ActivePlayer.get().Name}] append a piece`, 0);
       ActivePlayer.swap(); 
       SetButton(ActivePlayer.getIndex(), 1);
    }

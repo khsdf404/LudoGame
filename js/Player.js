@@ -1,3 +1,4 @@
+
 function SixAmount(arr) {
    let cnt = 0;
    let sum = 0;
@@ -7,6 +8,8 @@ function SixAmount(arr) {
    });
    return cnt || sum == 6 && 1 || 0;
 }
+
+
 class Player {
    Name;
    Colors;
@@ -30,9 +33,7 @@ class Player {
       this.Dices = arr;
       if (SixAmount(arr) > 0) {
          this.AllowAppend();
-      }
-
-      log(`Dices: ${arr} [${this.Name}]`)
+      } 
    }
    AllowAppend() {
       for (let i = 0; i < this.#teamsAmount; i++) {

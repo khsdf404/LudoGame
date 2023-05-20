@@ -1,24 +1,30 @@
-const colors = ['red', 'green', 'blue', 'yellow']
+const colors = ['blue', 'green', 'yellow', 'red']
+const colorsCoord = [
+   [[0, 3], [0, 4], [1, 3], [1, 4], [1, 5], [1, 6]],
+   [[6, 7], [7, 7], [6, 6], [7, 6], [8, 6], [9,6]],
+   [[13, 4], [13, 3], [12, 4], [12, 3], [12, 2], [12, 1]],
+   [[7, 0], [6, 0], [7, 1], [6, 1], [5, 1], [4, 1]]
+]
+const colorRequires = (index, i, j) => {
+   if (index == 0) return i == 0;
+   if (index == 1) return j == 7;
+   if (index == 2) return i == 13;
+   if (index == 3) return j == 0;
+}
 const $wrap = $js(`main`);
 const size = {width: 8, height: 14};
 
 
 const isColor = (i, j) => {
-   green = [[0, 3], [0, 4], [1, 3], [1, 4], [1, 5], [1, 6]];
-   blue = [[7, 0], [6, 0], [7, 1], [6, 1], [5, 1], [4, 1]];
-   red = [[13, 4], [13, 3], [12, 4], [12, 3], [12, 2], [12, 1]];
-   yellow = [[6, 7], [7, 7], [6, 6], [7, 6], [8, 6], [9,6]];
-
-   for(let k = 0; k < 6; k++) {
-      if (i == green[k][0] && j == green[k][1])
-         return k == 0 && 'team-green greenbg finish-cell' || i == 0 && 'team-green greenbg start-cell' || 'team-green greenbg finish-path';
-      if (i == blue[k][0] && j == blue[k][1])
-         return k == 0 && 'team-blue bluebg finish-cell' || j == 0 && 'team-blue bluebg start-cell' || 'team-blue bluebg finish-path';
-      if (i == red[k][0] && j == red[k][1])
-         return k == 0 && 'team-red redbg finish-cell' || i == 13 && 'team-red redbg start-cell' || 'team-red redbg finish-path';
-      if (i == yellow[k][0] && j == yellow[k][1])
-         return k == 0 && 'team-yellow yellowbg finish-cell' || j == 7 && 'team-yellow yellowbg start-cell' || 'team-yellow yellowbg finish-path';
+   for (let z = 0; z < 4; z++) { // 4 teams
+      for(let k = 0; k < 6; k++) { // 6 colored squares
+         if (i == colorsCoord[z][k][0] && j == colorsCoord[z][k][1])
+            return (k == 0 && `team-${colors[z]} ${colors[z]}bg finish-cell` 
+               || colorRequires(z, i, j) && `team-${colors[z]} ${colors[z]}bg start-cell` 
+               || `team-${colors[z]} ${colors[z]}bg finish-path`);
+      }
    }
+   
    return null;
 }
 function setTable () {
@@ -47,10 +53,6 @@ function setTable () {
       }
    }
    $wrap.ihtml(html);
-
-
-
-   
 }
 
 setTable();

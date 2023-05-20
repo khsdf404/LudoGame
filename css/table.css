@@ -4,10 +4,15 @@
  
    --field-width: calc(var(--cell-width) * 8 + 48px);
   
-   --redbg: #f00;
-   --greenbg: #0f0;
-   --bluebg: #00f;
-   --yellowbg: #ff0;
+   --red-bg: #f00;
+   --green-bg: #0f0;
+   --blue-bg: #00f;
+   --yellow-bg: #fc0;
+
+   --start-red-bg: #f99;
+   --start-green-bg: #bfb;
+   --start-blue-bg: #8cf;
+   --start-yellow-bg: #ff7;
 }
 
 
@@ -43,16 +48,28 @@ span.invisible {
 
 
 .redbg {
-   background: var(--redbg);
+   background: var(--red-bg);
+}
+.redbg.start-cell {
+   background: var(--start-red-bg);
 }
 .greenbg {
-   background: var(--greenbg);
+   background: var(--green-bg);
+}
+.greenbg.start-cell {
+   background: var(--start-green-bg);
 }
 .bluebg {
-   background: var(--bluebg);
+   background: var(--blue-bg);
+}
+.bluebg.start-cell {
+   background: var(--start-blue-bg);
 }
 .yellowbg {
-   background: var(--yellowbg);
+   background: var(--yellow-bg);
+}
+.yellowbg.start-cell {
+   background: var(--start-yellow-bg);
 }
 
 
@@ -61,4 +78,5 @@ span svg {
 }
 span.allowed svg {
    display: block;
-} 
+}
+
