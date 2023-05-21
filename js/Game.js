@@ -1,51 +1,68 @@
 const DiceAmount = 2;
-const Player1 = new Player;
-const Player2 = new Player;
-const $playbtn = $js(`#dicefield`);
+const team1 = ['red', 'green'];
+const team2 = ['yellow', 'blue'];
+const Player1 = new Player(team1, 'Danil');
+const Player2 = new Player(team2, 'Nastya');
+const Players = [Player1, Player2]
+const StartPlayer = 0;
+const $playbtns = $js(`.play-buttons-wrap button`);
 
-const Turn = (() => {
-   let cnt = 0;
-   return function() {
-      return (cnt++)%2;
-   }
-})();
+ 
 
-function DiceThrow() {
-   const random = (min, max) => Math.round(Math.random() * (max - min)) + min;
-   let arr = [];
-   for (let i = 0; i < DiceAmount; i++) {
-      arr.push(random(1, 6));
-   }
-   return arr;
+function SetButton(index, state) {
+   let added = state ? 'enabled' : 'disabled'
+   let removed = !state ? 'enabled' : 'disabled'
+   $playbtns
+      .clone()
+      .filter(($el, i) => { return i == index })
+      .addClass(added)
+      .removeClass(removed);
 }
-function SixAmount(arr) {
-   cnt = 0;
-   sum = 0;
-   arr.forEach(el => {
-      if (el == 6) cnt++;
-      sum += el;
-   });
-   return cnt || sum == 6 && 1 || 0;
-}
+const setTitle = (() => {
+   $text = $js(`.title-text`);
+   
+   return function(text, state) {
+      $text.text(text)
+      if (state)
+         $text.addClass(`hasMove`)
+      else 
+         $text.removeClass('hasMove')
+   }
+})()
+ 
 
-class Game {
+class Game { 
+   constructor() {
+      ActivePlayer.set(StartPlayer); // 0 is an index of player 1
+      SetButton(ActivePlayer.getIndex(), 1);
+   } 
    MakeMove() {
-      log(Turn());
-      let steps = DiceThrow();
-      log(`${steps}, Allow: ${SixAmount(steps) > 0}`)
-      if (SixAmount(steps) > 0) {
-         // allow to add Pan:
-            // Player1.Allow()
+      SetButton(0, 0);
+      SetButton(1, 0);
+      ActivePlayer.get().DiceThrow(DiceAmount);
+      setTitle(`Dices: ${ActivePlayer.get().Dices} [${ActivePlayer.get().Name}]`, ActivePlayer.get().hasMove());
+      
 
-         // show possible moves when click on squares with pans
-            // Player1.RefreshPanWays
-      }
+      if (!ActivePlayer.get().hasMove()) {
+         ActivePlayer.swap();
+         SetButton(ActivePlayer.getIndex(), 1);
+      }    
+   }
+   ResetMove() {
+      ActivePlayer.get().CancelAppend();
+      setTitle(`[${ActivePlayer.get().Name}] append a piece`, 0);
+      ActivePlayer.swap(); 
+      SetButton(ActivePlayer.getIndex(), 1);
    }
 }
 
 
-const game = new Game;
-
-$js(`#dicefield`).onClick(() => {
-   game.MakeMove();
+const NewGame = new Game();  
+$playbtns.onClick(($el) => {
+   if ($el.hasClass(`enabled`))
+      NewGame.MakeMove();
+});
+$js(`.start-cell`).onClick(($elem) => {
+   if ($elem.hasClass(`allowed`))
+      NewGame.ResetMove();
 })

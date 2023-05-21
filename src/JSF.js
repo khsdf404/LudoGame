@@ -26,6 +26,18 @@ class JSFeatures {
             this.e = Array.from(mainElem.e); 
             return;
         }
+        // span.gay
+        // .gay.gay
+        if (elem.match(/[a-zA-Z0-9]+\./)) {
+            elem = elem.replace(/, /g, ',');
+            let elemArr = elem.split(`,`);
+            let mainElem = new JSFeatures(elemArr[0])
+            for (let i = 1; i < elemArr.length; i++)     {
+                mainElem.extend(elemArr[i])
+            }
+            this.e = Array.from(mainElem.e); 
+            return;
+        }
         while (elem.indexOf(' ') > -1) {
             this.e = Array.from(this.find(elem, false, true).e)
             return;
@@ -105,9 +117,20 @@ class JSFeatures {
         } 
         excluded.e = output;
         return excluded;
+    } 
+    filter(f) {
+        let arr = [];
+        let result;
+        for(let i = 0; i < this.size(); i++) { 
+            result = f(new JSFeatures([this.get(i)]), i);
+            if (result) arr.push(this.get(i));
+        }
+        this.e = arr;
+        return this;
     }
-
-    
+    clone() {
+        return new JSFeatures(this.e);
+    }
 
 
 

@@ -1,18 +1,20 @@
-* {
-   margin: 0;
-   padding: 0;
+:root {
+   --cell-width: 4.5vh;
+   --cell-height: 4.5vh;
+ 
+   --field-width: calc(var(--cell-width) * 8 + 48px);
+  
+   --red-bg: #f00;
+   --green-bg: #0f0;
+   --blue-bg: #00f;
+   --yellow-bg: #fc0;
+
+   --start-red-bg: #f99;
+   --start-green-bg: #bfb;
+   --start-blue-bg: #8cf;
+   --start-yellow-bg: #ff7;
 }
 
-html, body {
-   display: flex;
-   flex-direction: column;
-
-   width: 100%;
-   height: 100%;
-
-   justify-content: center;
-   align-items: center;
-}
 
 main {
    position: relative;
@@ -21,15 +23,17 @@ main {
    flex-flow: wrap;
    justify-content: center;
    align-items: center;
-
-   width: 320px;
+ 
+   width: var(--field-width);
 } 
 
 span {
    display: flex;
+   justify-content: center;
+   align-items: center;
 
-   width: 34px;
-   height: 34px;
+   width: var(--cell-width);
+   height: var(--cell-height);
 
    margin: 2px;
 
@@ -42,15 +46,37 @@ span.invisible {
 }
 
 
+
 .redbg {
-   background: #f00;
+   background: var(--red-bg);
+}
+.redbg.start-cell {
+   background: var(--start-red-bg);
 }
 .greenbg {
-   background: #0f0;
+   background: var(--green-bg);
+}
+.greenbg.start-cell {
+   background: var(--start-green-bg);
 }
 .bluebg {
-   background: #00f;
+   background: var(--blue-bg);
+}
+.bluebg.start-cell {
+   background: var(--start-blue-bg);
 }
 .yellowbg {
-   background: #ff0;
+   background: var(--yellow-bg);
 }
+.yellowbg.start-cell {
+   background: var(--start-yellow-bg);
+}
+
+
+span svg {
+   display: none;
+}
+span.allowed svg {
+   display: block;
+}
+

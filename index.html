@@ -5,22 +5,23 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <title> Ludo! </title>
 
+      <link href="css/general.css" rel="stylesheet" type="text/css"/>
+      <link href="css/title-text.css" rel="stylesheet" type="text/css"/> 
       <link href="css/table.css" rel="stylesheet" type="text/css"/>
-      <link href="css/dicefield.css" rel="stylesheet" type="text/css"/> 
+      <link href="css/play-buttons.css" rel="stylesheet" type="text/css"/>
    </head>
    <body>
-      <main>
-         
-      </main>
-      <div id="dicefield">Кинуть кости!</div>
-
-
-
-
-      <script src="src/JSF.js" type="text/javascript"></script>
-      <script src="js/TableBuilder.js" type="text/javascript"></script>
-      <script src="js/Player.js" type="text/javascript"></script> 
-      <script src="js/Team.js" type="text/javascript"></script>
-      <script src="js/Game.js" type="text/javascript"></script>
+      <div class="title-text"></div>
+      <main></main>
+      <section class="play-buttons-wrap">
+         <button id="playbtn-player1">Player 1 do move</button>
+         <button id="playbtn-player2">Player 2 do move</button>
+      </section>
    </body>
+   <script src="src/JSF.js" type="text/javascript"></script>
+   <script src="js/TableBuilder.js" type="text/javascript"></script>
+   <script src="js/Team.js" type="text/javascript"></script>
+   <script src="js/Player.js" type="text/javascript"></script>
+   <script src="js/ActivePlayer.js" type="text/javascript"></script>
+   <script src="js/Game.js" type="text/javascript"></script>
 </html>
