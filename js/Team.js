@@ -65,16 +65,16 @@ class Team {
          return indexArr;
       }
       if (this.Color == 'green') {
-         this.#path = path('green', 4);
+         this.#path = path('green', 14);
       }
       else if (this.Color == 'yellow') {
-         this.#path = path('yellow', 14);
+         this.#path = path('yellow', 24);
       }
       else if (this.Color == 'red') {
-         this.#path = path('red', 24);
+         this.#path = path('red', 34);
       }
       else {
-         this.#path = path('blue', 34);
+         this.#path = path('blue', 4);
       }
    }
 
@@ -87,7 +87,7 @@ class Team {
    }
 
    AppendPan() {
-      log(`pan appended ${this.Color} to a ${this.Owner.Name}`)
+      this.#pans.push(new Pan(this.#path, this.Color))
    };
 }
  

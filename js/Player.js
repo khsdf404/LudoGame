@@ -35,7 +35,8 @@ class Player {
       } 
    }
    hasMove() {
-      return SixAmount(this.Dices) > 0;
+      // swap true on DicesHaveMove() in future
+      return this.Dices.length > 0 && true || SixAmount(this.Dices) > 0;
    }
 
 

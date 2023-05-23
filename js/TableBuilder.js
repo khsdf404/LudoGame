@@ -15,6 +15,7 @@ const $wrap = $js(`main`);
 const size = {width: 8, height: 14};
 
 
+
 const isColor = (i, j) => {
    for (let z = 0; z < 4; z++) { // 4 teams
       for(let k = 0; k < 6; k++) { // 6 colored squares
@@ -56,4 +57,4 @@ function setTable () {
 }
 
 setTable();
-
+const $cells = $wrap.find('span');
