@@ -1,4 +1,3 @@
-
 function SixAmount(arr) {
    let cnt = 0;
    let sum = 0;
@@ -35,6 +34,11 @@ class Player {
          this.AllowAppend();
       } 
    }
+   hasMove() {
+      return SixAmount(this.Dices) > 0;
+   }
+
+
    AllowAppend() {
       for (let i = 0; i < this.#teamsAmount; i++) {
          this.#teams[i].AllowAppend(this);
@@ -44,9 +48,5 @@ class Player {
       for (let i = 0; i < this.#teamsAmount; i++) {
          this.#teams[i].CancelAppend();
       }
-   };
- 
-   hasMove() {
-      return SixAmount(this.Dices) > 0;
-   }
+   }; 
 }

@@ -19,21 +19,7 @@ const Square = ((() => {
    }
 })())();
 
-function getPath(color, startIndex) {
-   let indexArr = []; 
-   for (let i = 0; i < 40; i++) 
-      indexArr.push(Square[(i+startIndex) % 40]);
-   // .finish-path indexes
-   if (color == 'yellow')
-      indexArr.push(...[54, 62, 70, 78]);
-   else if (color == 'blue')
-      indexArr.push(...[57, 49, 41, 33]);
-   else if (color == 'green')
-      indexArr.push(...[11, 12, 13, 14]);
-   else if (color == 'red')
-      indexArr.push(100, 99, 98, 97);
-   return indexArr;
-}
+
 
 
 
@@ -41,7 +27,7 @@ class Team {
    Color;
    Owner;
    #path;
-   #pans;
+   #pans = [];
    #startCell;
    #finishCell;
    #finishWay;
@@ -50,9 +36,9 @@ class Team {
       this.Color = color;
       this.#setPath();
       this.#pans = [];
-      this.#startCell = $js(`.start-cell`).filter((el) => { return el.hasClass(`team-${color}`) });
-      this.#finishCell = $js(`.finish-cell`).filter((el) => { return el.hasClass(`team-${color}`) });
-      this.#finishWay = $js(`.finish-way`).filter((el) => { return el.hasClass(`team-${color}`) });
+      this.#startCell = $js(`.start-cell`).filter(($el) => { return $el.hasClass(`team-${color}`) });
+      this.#finishCell = $js(`.finish-cell`).filter(($el) => { return $el.hasClass(`team-${color}`) });
+      this.#finishWay = $js(`.finish-way`).filter(($el) => { return $el.hasClass(`team-${color}`) });
 
       this.#startCell.onClick(($elem, e, i) => { 
          if ($elem.hasClass(`allowed`))
@@ -63,17 +49,32 @@ class Team {
       return this.#path;
    }
    #setPath () {
+      function path(color, startIndex) {
+         let indexArr = [];
+         for (let i = 0; i < 40; i++) 
+            indexArr.push(Square[(i+startIndex) % 40]);
+         // .finish-path indexes
+         if (color == 'yellow')
+            indexArr.push(...[54, 62, 70, 78]);
+         else if (color == 'blue')
+            indexArr.push(...[57, 49, 41, 33]);
+         else if (color == 'green')
+            indexArr.push(...[11, 12, 13, 14]);
+         else if (color == 'red')
+            indexArr.push(100, 99, 98, 97);
+         return indexArr;
+      }
       if (this.Color == 'green') {
-         this.#path = getPath('green', 4);
+         this.#path = path('green', 4);
       }
       else if (this.Color == 'yellow') {
-         this.#path = getPath('yellow', 14);
+         this.#path = path('yellow', 14);
       }
       else if (this.Color == 'red') {
-         this.#path = getPath('red', 24);
+         this.#path = path('red', 24);
       }
       else {
-         this.#path = getPath('blue', 34);
+         this.#path = path('blue', 34);
       }
    }
 
