@@ -26,8 +26,6 @@ class JSFeatures {
             this.e = Array.from(mainElem.e); 
             return;
         }
-        // span.gay
-        // .gay.gay
         if (elem.match(/[a-zA-Z0-9]+\./)) {
             elem = elem.replace(/, /g, ',');
             let elemArr = elem.split(`,`);
@@ -50,7 +48,7 @@ class JSFeatures {
             elem = this.deepthElem.getElementsByTagName(elem); 
         }
         this.e = Array.from(elem); 
-    } 
+    }
     get(index = 0) {
         // index is a number(returns DOM-element) or array (returns array of DOM-elements)
         if (typeof(index) == 'number') return this.e && this.e[index] || null;
@@ -58,12 +56,13 @@ class JSFeatures {
         for(let i = 0; i < index.length; i++)
             childGroup.push(this.e[index[i]]);
         return childGroup;
-    } 
+    }
     size() {
         return this.e && this.e.length || 0;
     }
     find(elem, deepth = false, fromConstructor = false) {
         if (!fromConstructor && (!this.e || this.e.length == 0)) return new JSFeatures([]);
+        // return new JSF if elem is int or array of indexes
         if (typeof(elem) == 'number') { 
             return new JSFeatures([this.e[elem]]);
         }
@@ -73,7 +72,8 @@ class JSFeatures {
                 childGroup.e.push(this.e[elem[i]]);
             }
             return childGroup;
-        } 
+        }
+        // return JSF of childs
         this.deepthElem = this.get() || document 
         let a = [];
        
@@ -388,7 +388,17 @@ class JSFeatures {
         else 
             this.get().dispatchEvent(new Event(str));
     }
-
+    removeEvent(type, f) {
+        if (!this.e || !this.size()) return this;
+        if (!type) return this.#Exeption('Invaid event type');
+        if (!f) return this.#Exeption('Invaid event function');
+        if (this.size() > 1)
+            this.every((e, i) => {
+                e.removeEventListener(type, f);
+            })
+        else 
+            this.get().removeEventListener(type, f);
+    }
 
 
 

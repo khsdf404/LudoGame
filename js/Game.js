@@ -33,38 +33,34 @@ const setTitle = (() => {
 
 class Game { 
    constructor() {
+      Player1.setParent(this);
+      Player2.setParent(this);
       ActivePlayer.set(StartPlayer); // 0 is an index of player 1
       SetButton(ActivePlayer.getIndex(), 1);
 
-
       $playBtns.onClick(($el) => {
          if ($el.hasClass(`enabled`))
-            NewGame.MakeMove();
-      });
-      $startCells.onClick(($elem) => {
-         if ($elem.hasClass(`allowed`))
-            NewGame.ResetMove();
+            this.Move();
       });
    } 
-   MakeMove() {
+   Move() {
       SetButton(0, 0);
       SetButton(1, 0);
       ActivePlayer.get().DiceThrow(DiceAmount);
-      setTitle(`Dices: ${ActivePlayer.get().Dices} [${ActivePlayer.get().Name}]`, ActivePlayer.get().hasMove());
-      
-
+      setTitle(`Dices: ${ActivePlayer.get().getDices()} [${ActivePlayer.get().getName()}]`, ActivePlayer.get().hasMove());
       if (!ActivePlayer.get().hasMove()) {
          ActivePlayer.swap();
          SetButton(ActivePlayer.getIndex(), 1);
-      }    
+         return;
+      }
+      ActivePlayer.get().Move(); 
    }
-   ResetMove() {
-      ActivePlayer.get().CancelAppend();
-      setTitle(`[${ActivePlayer.get().Name}] append a piece`, 0);
+   EndMove() {
+      // ActivePlayer.get().EndMove();
+      setTitle(`[${ActivePlayer.get().getName()}] append a piece`, 0);
       ActivePlayer.swap(); 
       SetButton(ActivePlayer.getIndex(), 1);
    }
 }
-
 
 const NewGame = new Game();
