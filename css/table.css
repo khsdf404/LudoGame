@@ -45,6 +45,13 @@ span {
 span.invisible {
    opacity: 0;
 }
+span.finish-path {
+   opacity: 0;
+}
+span.finish-path.visible {
+   opacity: 0;
+}
+
 
 
 
