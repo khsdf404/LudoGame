@@ -40,7 +40,7 @@ class Team {
       this.#finishCell = $js(`.finish-cell`).filter(($el) => { return $el.hasClass(`team-${color}`) });
       this.#finishWay = $js(`.finish-way`).filter(($el) => { return $el.hasClass(`team-${color}`) });
 
-      this.#startCell.onClick(($elem, e, i) => { 
+      this.#startCell.onClick(($elem) => { 
          if ($elem.hasClass(`allowed`))
             this.AppendPan();
       })
@@ -89,6 +89,26 @@ class Team {
    AppendPan() {
       this.#pans.push(new Pan(this.#path, this.Color))
    };
+   HasPans() {
+      return this.#pans.length > 0
+   }
+
+   MovablePans(diceSum) {
+      this.#EachPan((pan) => {
+         pan.setMovable(diceSum);
+      })
+   }
+   UnmovablePans() {
+      this.#EachPan((pan) => {
+         pan.setUnmovable();
+      })
+   }
+
+   #EachPan(f) {
+      for (let i = 0; i < this.#pans.length; i++) {
+         f(this.#pans[i])
+      }
+   }
 }
  
  

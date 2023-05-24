@@ -388,7 +388,17 @@ class JSFeatures {
         else 
             this.get().dispatchEvent(new Event(str));
     }
-
+    removeEvent(type, f) {
+        if (!this.e || !this.size()) return this;
+        if (!type) return this.#Exeption('Invaid event type');
+        if (!f) return this.#Exeption('Invaid event function');
+        if (this.size() > 1)
+            this.every((e, i) => {
+                e.removeEventListener(type, f);
+            })
+        else 
+            this.get().removeEventListener(type, f);
+    }
 
 
 

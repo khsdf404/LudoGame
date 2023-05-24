@@ -51,15 +51,15 @@ class Game {
       SetButton(1, 0);
       ActivePlayer.get().DiceThrow(DiceAmount);
       setTitle(`Dices: ${ActivePlayer.get().Dices} [${ActivePlayer.get().Name}]`, ActivePlayer.get().hasMove());
-      
-
       if (!ActivePlayer.get().hasMove()) {
          ActivePlayer.swap();
          SetButton(ActivePlayer.getIndex(), 1);
-      }    
+         return;
+      }
+      ActivePlayer.get().Move(); 
    }
    ResetMove() {
-      ActivePlayer.get().CancelAppend();
+      ActivePlayer.get().EndMove();
       setTitle(`[${ActivePlayer.get().Name}] append a piece`, 0);
       ActivePlayer.swap(); 
       SetButton(ActivePlayer.getIndex(), 1);
