@@ -17,7 +17,7 @@
 
 .play-buttons-wrap button {
    height: 100%;
-   width: 45%; 
+   width: 100%; 
 
    background: #ccc8c7;
    border-radius: 4px;
