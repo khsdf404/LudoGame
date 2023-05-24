@@ -20,6 +20,8 @@ class Player {
       return this.#dices 
    };
 
+
+   
    DiceThrow(DiceAmount) {
       const random = (min, max) => Math.round(Math.random() * (max - min)) + min;
       let arr = [];

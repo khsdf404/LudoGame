@@ -1,0 +1,59 @@
+span.start-cell {
+   z-index: 1;
+}
+
+.yellowbg.start-cell {
+   background: var(--start-yellow-bg);
+}
+.redbg.start-cell {
+   background: var(--start-red-bg);
+}
+.greenbg.start-cell {
+   background: var(--start-green-bg);
+}
+.bluebg.start-cell {
+   background: var(--start-blue-bg);
+} 
+
+
+
+
+
+
+
+
+span > svg {
+   display: none;
+   position: absolute;
+   justify-content: center;
+   align-items: center;
+   
+   width: 100%;
+   height: 100%;
+
+   border-radius: 3px;
+   border: 1px solid #000;
+
+   color: #222;
+   font-size: 40px;
+   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+span.allowed > svg {
+   display: flex;
+}
+span.allowed.bluebg > svg {
+   background: var(--start-blue-bg);
+   top: calc(100% + 3px);
+}
+span.allowed.greenbg > svg {
+   background: var(--start-green-bg);
+   left: calc(-100% - 6px);
+}
+span.allowed.yellowbg > svg {
+   background: var(--start-yellow-bg);
+   top: calc(-100% - 6px);
+}
+span.allowed.redbg > svg {
+   background: var(--start-red-bg);
+   left: calc(100% + 3px);
+}

@@ -355,7 +355,12 @@ class JSFeatures {
         if (!str) return new JSFeatures([this.get().parentNode]);        
         return new JSFeatures([this.get().parentElement.closest(str)]);
     }
-    
+    remove() {
+        if (!this.e || !this.size()) return this.#Exeption('Object is empty');
+        this.every((el) => {
+            el.parentNode.removeChild(el);
+        })
+    }
 
 
 

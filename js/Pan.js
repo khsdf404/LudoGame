@@ -23,9 +23,11 @@ class Pan {
    }
    DrawPan() {
       this.#cell.addClass('pan').addClass(`pan-${this.#color}`);
+      this.#cell.ihtml(this.#cell.ihtml() + `<div></div>`)
    }
    ErasePan() {
       this.#cell.removeClass('pan').removeClass(`pan-${this.#color}`);
+      this.#cell.find(`div`).remove();
    }
 
 
